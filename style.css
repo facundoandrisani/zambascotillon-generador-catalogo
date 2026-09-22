@@ -1,25 +1,39 @@
 /* ==========================================================================
-   HOJA DE ESTILOS UNIFICADA - CATÁLOGOS PDF Y STREAMLIT (ZAMBAS)
+   ESTILOS ROBUSTOS STREAMLIT + WEASYPRINT (COMPATIBLE CON NUBE / STREAMLIT CLOUD)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@400;600;800&display=swap');
 
-/* --- 1. PERSONALIZACIÓN DE BARRA LATERAL STREAMLIT (#F29F05) --- */
+/* --- 1. PERSONALIZACIÓN BARRA LATERAL (CONTRASTE GARANTIZADO) --- */
 [data-testid="stSidebar"] {
     background-color: #FFF9F2 !important;
     border-right: 2px solid #F29F05 !important;
 }
 
-[data-testid="stSidebar"] h1, 
-[data-testid="stSidebar"] h2, 
-[data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] label {
+/* Forzar color de texto legible en expanders (Evita texto blanco sobre fondo claro en Dark Mode) */
+[data-testid="stSidebar"] [data-testid="stExpander"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #F29F05 !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stExpander"] details summary {
     color: #1A1A1A !important;
-    font-family: 'Montserrat', sans-serif !important;
     font-weight: 700 !important;
 }
 
-/* Botón principal de Streamlit con color de marca */
+[data-testid="stSidebar"] [data-testid="stExpander"] details summary span {
+    color: #1A1A1A !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .stMarkdown {
+    color: #1A1A1A !important;
+}
+
+/* Botón principal #F29F05 */
 div.stButton > button[kind="primary"] {
     background-color: #F29F05 !important;
     border-color: #D98200 !important;
@@ -71,7 +85,6 @@ body {
         box-sizing: border-box;
     }
     
-    /* Barra de Navegación JS Ultra Rápida */
     .nav-js-bar {
         width: 100%;
         max-width: 660px;
@@ -94,7 +107,6 @@ body {
         font-weight: 700;
         cursor: pointer;
         font-size: 13px;
-        transition: background 0.2s;
     }
     .btn-nav:hover {
         background: #D98200;
@@ -109,7 +121,7 @@ body {
     }
 }
 
-/* --- 4. ESTILOS DE PORTADA --- */
+/* --- 4. PORTADA Y PRODUCTOS --- */
 .portada {
     display: flex;
     flex-direction: column;
@@ -169,7 +181,6 @@ body {
     margin: 15px auto;
 }
 
-/* --- 5. ENCABEZADO Y GRILLA DE PRODUCTOS --- */
 .header-cat {
     display: flex;
     justify-content: space-between;
