@@ -1,0 +1,282 @@
+/* ==========================================================================
+   HOJA DE ESTILOS UNIFICADA - CATÁLOGOS PDF Y STREAMLIT (ZAMBAS)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@400;600;800&display=swap');
+
+/* --- 1. PERSONALIZACIÓN DE BARRA LATERAL STREAMLIT (#F29F05) --- */
+[data-testid="stSidebar"] {
+    background-color: #FFF9F2 !important;
+    border-right: 2px solid #F29F05 !important;
+}
+
+[data-testid="stSidebar"] h1, 
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] label {
+    color: #1A1A1A !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;
+}
+
+/* Botón principal de Streamlit con color de marca */
+div.stButton > button[kind="primary"] {
+    background-color: #F29F05 !important;
+    border-color: #D98200 !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(242, 159, 5, 0.3) !important;
+}
+
+div.stButton > button[kind="primary"]:hover {
+    background-color: #D98200 !important;
+}
+
+/* --- 2. CONFIGURACIÓN DE IMPRESIÓN WEASYPRINT --- */
+@page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #1A1A1A;
+    margin: 0;
+    padding: 0;
+    background-color: #F4F4F7;
+}
+
+/* --- 3. VISTA PREVIA RESPONSIVA PANTALLA --- */
+@media screen {
+    body {
+        background-color: #EFEFEF;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .pagina {
+        width: 100%;
+        max-width: 660px;
+        background-color: #FFFFFF;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        border-radius: 6px;
+        margin: 0 auto;
+        padding: 10mm;
+        box-sizing: border-box;
+    }
+    
+    /* Barra de Navegación JS Ultra Rápida */
+    .nav-js-bar {
+        width: 100%;
+        max-width: 660px;
+        background: #FFFFFF;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid #F29F05;
+    }
+    .btn-nav {
+        background: #F29F05;
+        color: #ffffff;
+        border: none;
+        padding: 7px 16px;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background 0.2s;
+    }
+    .btn-nav:hover {
+        background: #D98200;
+    }
+    .input-jump {
+        width: 55px;
+        text-align: center;
+        padding: 4px;
+        border: 1px solid #CCCCCC;
+        border-radius: 4px;
+        font-weight: 700;
+    }
+}
+
+/* --- 4. ESTILOS DE PORTADA --- */
+.portada {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    min-height: 270mm;
+    border: 10px solid #F29F05;
+    background-color: #FFFFFF;
+}
+
+.portada-fullbleed {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border: none !important;
+}
+
+.portada-overlay {
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    color: #ffffff !important;
+    padding: 35px 25px;
+    border-radius: 12px;
+    width: 85%;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.titulo-portada {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #F29F05;
+}
+
+.subtitulo-portada {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+.img-portada {
+    max-width: 75%;
+    max-height: 110mm;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 15px auto;
+}
+
+/* --- 5. ENCABEZADO Y GRILLA DE PRODUCTOS --- */
+.header-cat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #F29F05;
+}
+
+.header-cat h1 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    margin: 0;
+}
+
+.header-logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+}
+
+.grilla {
+    display: grid;
+    gap: 16px 12px;
+}
+
+.tarjeta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    page-break-inside: avoid;
+}
+
+.box-imagen {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+
+.circulo-imagen {
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.imagen-producto {
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+.titulo {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    line-height: 1.25;
+    height: 2.4em;
+    overflow: hidden;
+    margin-bottom: 3px;
+}
+
+.sku {
+    font-size: 9px;
+    color: #666666;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.stock-verde {
+    color: #2B8A3E;
+    font-weight: 700;
+    font-size: 9px;
+    margin-bottom: 6px;
+}
+
+.stock-naranja {
+    color: #E65100;
+    font-weight: 700;
+    font-size: 9px;
+    margin-bottom: 6px;
+}
+
+.precio-pill {
+    background: linear-gradient(135deg, #F29F05, #FF0066);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 5px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(242, 159, 5, 0.25);
+}
