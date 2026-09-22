@@ -1,16 +1,31 @@
 /* ==========================================================================
-   ESTILOS ROBUSTOS STREAMLIT + WEASYPRINT (COMPATIBLE CON NUBE / STREAMLIT CLOUD)
+   FORZAR TEMA CLARO EN TODA LA APLICACIÓN STREAMLIT (NUBE Y LOCAL)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@400;600;800&display=swap');
 
-/* --- 1. PERSONALIZACIÓN BARRA LATERAL (CONTRASTE GARANTIZADO) --- */
-[data-testid="stSidebar"] {
+/* --- 1. FONDO BLANCO Y TEXTOS OSCUROS GLOBALES DE STREAMLIT --- */
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-testid="stMainBlockContainer"] {
+    background-color: #FFFFFF !important;
+    color: #1A1A1A !important;
+}
+
+/* Forzar color oscuro legible en todos los títulos y textos de la app */
+h1, h2, h3, h4, h5, h6, p, span, label, div, .stMarkdown {
+    color: #1A1A1A !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- 2. BARRA LATERAL (FONDO CREMA CÁLIDO Y BORDE #F29F05) --- */
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div:first-child {
     background-color: #FFF9F2 !important;
     border-right: 2px solid #F29F05 !important;
 }
 
-/* Forzar color de texto legible en expanders (Evita texto blanco sobre fondo claro en Dark Mode) */
 [data-testid="stSidebar"] [data-testid="stExpander"] {
     background-color: #FFFFFF !important;
     border: 1px solid #F29F05 !important;
@@ -18,22 +33,25 @@
     margin-bottom: 10px !important;
 }
 
-[data-testid="stSidebar"] [data-testid="stExpander"] details summary {
-    color: #1A1A1A !important;
-    font-weight: 700 !important;
-}
-
+[data-testid="stSidebar"] [data-testid="stExpander"] details summary,
 [data-testid="stSidebar"] [data-testid="stExpander"] details summary span {
     color: #1A1A1A !important;
     font-weight: 700 !important;
 }
 
-[data-testid="stSidebar"] label,
-[data-testid="stSidebar"] .stMarkdown {
-    color: #1A1A1A !important;
+/* --- 3. CAJAS DE SUBIDA DE ARCHIVOS (FILE UPLOADERS) --- */
+[data-testid="stFileUploader"] {
+    background-color: #FAF9F6 !important;
+    border: 1px dashed #F29F05 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
 }
 
-/* Botón principal #F29F05 */
+[data-testid="stFileUploader"] section {
+    background-color: #FFFFFF !important;
+}
+
+/* --- 4. BOTÓN PRINCIPAL (#F29F05) --- */
 div.stButton > button[kind="primary"] {
     background-color: #F29F05 !important;
     border-color: #D98200 !important;
@@ -47,7 +65,7 @@ div.stButton > button[kind="primary"]:hover {
     background-color: #D98200 !important;
 }
 
-/* --- 2. CONFIGURACIÓN DE IMPRESIÓN WEASYPRINT --- */
+/* --- 5. CONFIGURACIÓN DE IMPRESIÓN WEASYPRINT --- */
 @page {
     size: A4 portrait;
     margin: 10mm 12mm;
@@ -57,27 +75,12 @@ div.stButton > button[kind="primary"]:hover {
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    color: #1A1A1A;
-    margin: 0;
-    padding: 0;
-    background-color: #F4F4F7;
-}
-
-/* --- 3. VISTA PREVIA RESPONSIVA PANTALLA --- */
+/* --- 6. VISTA PREVIA RESPONSIVA PANTALLA --- */
 @media screen {
-    body {
-        background-color: #EFEFEF;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
     .pagina {
         width: 100%;
         max-width: 660px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
         border-radius: 6px;
         margin: 0 auto;
@@ -88,7 +91,7 @@ body {
     .nav-js-bar {
         width: 100%;
         max-width: 660px;
-        background: #FFFFFF;
+        background: #FFFFFF !important;
         padding: 10px 15px;
         border-radius: 8px;
         margin-bottom: 12px;
@@ -97,10 +100,11 @@ body {
         justify-content: space-between;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         border: 1px solid #F29F05;
+        color: #1A1A1A !important;
     }
     .btn-nav {
-        background: #F29F05;
-        color: #ffffff;
+        background: #F29F05 !important;
+        color: #ffffff !important;
         border: none;
         padding: 7px 16px;
         border-radius: 6px;
@@ -109,7 +113,7 @@ body {
         font-size: 13px;
     }
     .btn-nav:hover {
-        background: #D98200;
+        background: #D98200 !important;
     }
     .input-jump {
         width: 55px;
@@ -118,10 +122,12 @@ body {
         border: 1px solid #CCCCCC;
         border-radius: 4px;
         font-weight: 700;
+        background-color: #FFFFFF !important;
+        color: #1A1A1A !important;
     }
 }
 
-/* --- 4. PORTADA Y PRODUCTOS --- */
+/* --- 7. PORTADA Y PRODUCTOS --- */
 .portada {
     display: flex;
     flex-direction: column;
@@ -133,7 +139,7 @@ body {
     overflow: hidden;
     min-height: 270mm;
     border: 10px solid #F29F05;
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
 }
 
 .portada-fullbleed {
@@ -160,7 +166,7 @@ body {
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 10px;
-    color: #F29F05;
+    color: #F29F05 !important;
 }
 
 .subtitulo-portada {
@@ -195,7 +201,7 @@ body {
     font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #1A1A1A;
+    color: #1A1A1A !important;
     margin: 0;
 }
 
@@ -231,7 +237,7 @@ body {
 
 .circulo-imagen {
     border-radius: 50%;
-    background: #ffffff;
+    background: #ffffff !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,7 +259,7 @@ body {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #1A1A1A;
+    color: #1A1A1A !important;
     line-height: 1.25;
     height: 2.4em;
     overflow: hidden;
@@ -262,28 +268,28 @@ body {
 
 .sku {
     font-size: 9px;
-    color: #666666;
+    color: #666666 !important;
     font-weight: 600;
     margin-bottom: 2px;
 }
 
 .stock-verde {
-    color: #2B8A3E;
+    color: #2B8A3E !important;
     font-weight: 700;
     font-size: 9px;
     margin-bottom: 6px;
 }
 
 .stock-naranja {
-    color: #E65100;
+    color: #E65100 !important;
     font-weight: 700;
     font-size: 9px;
     margin-bottom: 6px;
 }
 
 .precio-pill {
-    background: linear-gradient(135deg, #F29F05, #FF0066);
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #F29F05, #FF0066) !important;
+    color: #FFFFFF !important;
     font-size: 14px;
     font-weight: 800;
     padding: 5px 16px;
