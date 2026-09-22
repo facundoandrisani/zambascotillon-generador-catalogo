@@ -50,7 +50,7 @@ with col_h1:
         st.image(PATH_LOGO_VALIDO, width=105)
 with col_h2:
     st.title("Generador Automático de Catálogos PDF")
-    st.caption("Plantilla Oficial ZAMBAS — Color de Marca #F29F05")
+    st.caption("Zambas Cotillon")
 
 if not WEASYPRINT_OK:
     st.info("Aviso Windows: Podés diseñar y ver la Vista Previa en pantalla a la perfección. Para descargar el PDF en tu PC local, instalá GTK3 para Windows.")
@@ -61,17 +61,17 @@ st.sidebar.title("Personalización")
 with st.sidebar.expander("1. Plantilla y Preset", expanded=True):
     template_elegido = st.selectbox(
         "Estilo de partida:",
-        ["ZAMBAS Oficial (#F29F05)", "Grilla Comercial (Pastel)", "Editorial Magazine (Verde / Serif)", "Minimalista Lujo (Moderno)"]
+        ["Zambas Oficial", "Grilla Comercial (Pastel)", "Editorial Magazine (Verde / Serif)", "Minimalista Lujo (Moderno)"]
     )
 
 with st.sidebar.expander("2. Página de Portada", expanded=False):
     incluir_portada = st.checkbox("Incluir página de Portada", value=True)
-    subtitulo_portada = "Catálogo Oficial de Productos 2024"
+    subtitulo_portada = "Catálogo Oficial de Productos"
     archivo_portada = None
     modo_img_portada = "Centrada Destacada"
     
     if incluir_portada:
-        subtitulo_portada = st.text_input("Subtítulo / Bajada", value="Catálogo Oficial de Productos 2024")
+        subtitulo_portada = st.text_input("Subtítulo / Bajada", value="Catálogo Oficial de Productos")
         archivo_portada = st.file_uploader("Imagen / Logo de Portada (Opcional)", type=['png', 'jpg', 'jpeg'])
         modo_img_portada = st.selectbox("Ajuste de Imagen de Portada:", ["Centrada Destacada", "Fondo Completo (Full Bleed)", "Sin Imagen"])
 
@@ -308,7 +308,7 @@ if archivo_stock and archivo_precio:
             <!DOCTYPE html>
             <html>
             <head>
-                <meta charset="utf-8">
+                <meta charset="uDFtf-8">
                 <style>{dynamic_css}</style>
             </head>
             <body>
@@ -354,7 +354,7 @@ if archivo_stock and archivo_precio:
 
     with col_left:
         if WEASYPRINT_OK:
-            if st.button("🚀 Generar y Descargar PDF Completo", type="primary"):
+            if st.button("Generar y Descargar PDF Completo", type="primary"):
                 html_full = f'<!DOCTYPE html><html><head><meta charset="utf-8"><style>{dynamic_css}</style></head><body>{"".join(paginas_html)}</body></html>'
                 pdf_buffer = io.BytesIO()
                 HTML(string=html_full).write_pdf(pdf_buffer)
