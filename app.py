@@ -16,7 +16,7 @@ except Exception:
 # --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Generador de Catálogos - ZAMBAS", layout="wide")
 
-# --- CARGAR ARCHIVO DE ESTILOS CSS EXTERNO ---
+# --- CARGAR ARCHIVO DE ESTILOS CSS EXTERNO DE FORMA SEGURA ---
 def cargar_css():
     ruta_css = os.path.join(os.path.dirname(__file__), "style.css")
     if os.path.exists(ruta_css):
@@ -25,21 +25,32 @@ def cargar_css():
 
 cargar_css()
 
-# --- CARGAR LOGO ZAMBAS SI EXISTE ---
-PATH_LOGO = r"C:\Users\facu1\.gemini\antigravity\brain\0def72fb-28b6-4e8e-a5f5-ec8290d7f128\.user_uploaded\media_1790045780769.png"
+# --- CARGAR LOGO DE FORMA RELATIVA ---
+dir_base = os.path.dirname(__file__)
+posibles_logos = [
+    os.path.join(dir_base, "logo.png"),
+    os.path.join(dir_base, "assets", "logo.png"),
+    os.path.join(dir_base, "logo.jpg")
+]
+
 LOGO_B64 = ""
-if os.path.exists(PATH_LOGO):
-    with open(PATH_LOGO, "rb") as f:
-        LOGO_B64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+PATH_LOGO_VALIDO = None
+
+for p in posibles_logos:
+    if os.path.exists(p):
+        PATH_LOGO_VALIDO = p
+        with open(p, "rb") as f:
+            LOGO_B64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+        break
 
 # Encabezado de la App
 col_h1, col_h2 = st.columns([1, 6])
 with col_h1:
-    if LOGO_B64:
-        st.image(PATH_LOGO, width=105)
+    if PATH_LOGO_VALIDO:
+        st.image(PATH_LOGO_VALIDO, width=105)
 with col_h2:
     st.title("Generador Automático de Catálogos PDF")
-    st.caption("Zambas Cotillon")
+    st.caption("Plantilla Oficial ZAMBAS — Color de Marca #F29F05")
 
 if not WEASYPRINT_OK:
     st.info("Aviso Windows: Podés diseñar y ver la Vista Previa en pantalla a la perfección. Para descargar el PDF en tu PC local, instalá GTK3 para Windows.")
@@ -50,17 +61,17 @@ st.sidebar.title("Personalización")
 with st.sidebar.expander("1. Plantilla y Preset", expanded=True):
     template_elegido = st.selectbox(
         "Estilo de partida:",
-        ["Zambas Oficial", "Grilla Comercial (Pastel)", "Editorial Magazine (Verde / Serif)", "Minimalista Lujo (Moderno)"]
+        ["ZAMBAS Oficial (#F29F05)", "Grilla Comercial (Pastel)", "Editorial Magazine (Verde / Serif)", "Minimalista Lujo (Moderno)"]
     )
 
 with st.sidebar.expander("2. Página de Portada", expanded=False):
     incluir_portada = st.checkbox("Incluir página de Portada", value=True)
-    subtitulo_portada = "Catálogo Oficial de Productos"
+    subtitulo_portada = "Catálogo Oficial de Productos 2024"
     archivo_portada = None
     modo_img_portada = "Centrada Destacada"
     
     if incluir_portada:
-        subtitulo_portada = st.text_input("Subtítulo / Bajada", value="Catálogo Oficial de Productos")
+        subtitulo_portada = st.text_input("Subtítulo / Bajada", value="Catálogo Oficial de Productos 2024")
         archivo_portada = st.file_uploader("Imagen / Logo de Portada (Opcional)", type=['png', 'jpg', 'jpeg'])
         modo_img_portada = st.selectbox("Ajuste de Imagen de Portada:", ["Centrada Destacada", "Fondo Completo (Full Bleed)", "Sin Imagen"])
 
@@ -159,7 +170,7 @@ if archivo_stock and archivo_precio:
     with col_left:
         st.subheader("2. Selección de Categorías")
         
-        # --- INICIALIZACIÓN Y CALLBACKS BIDIRECCIONALES SIN BUGS ---
+        # --- CALLBACKS DE SELECCIÓN SIN ERRORES ---
         for r in todos_rubros:
             if f"chk_{r}" not in st.session_state:
                 st.session_state[f"chk_{r}"] = True
@@ -190,8 +201,11 @@ if archivo_stock and archivo_precio:
         st.info(f"Se incluirán **{len(rubros_elegidos)}** rubros ({len(df_catalogo[df_catalogo['Rubro'].isin(rubros_elegidos)])} productos).")
 
     # Cargar contenido de style.css
-    with open(os.path.join(os.path.dirname(__file__), "style.css"), "r", encoding="utf-8") as f:
-        css_content = f.read()
+    css_content = ""
+    ruta_css_file = os.path.join(dir_base, "style.css")
+    if os.path.exists(ruta_css_file):
+        with open(ruta_css_file, "r", encoding="utf-8") as f:
+            css_content = f.read()
 
     box_h = "165px" if num_rows <= 2 else "115px"
     circle_s = "110px" if num_rows <= 2 else "80px"
